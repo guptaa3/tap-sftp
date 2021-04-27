@@ -22,6 +22,7 @@ class SFTPConnection():
         self.key = None
         if private_key_file:
             key_path = os.path.expanduser(private_key_file)
+            LOGGER.info("key path", key_path)
             self.key = paramiko.RSAKey.from_private_key_file(key_path)
 
     def handle_backoff(details):
@@ -153,7 +154,6 @@ class SFTPConnection():
         return [f for f in files if matcher.search(f["filepath"])]
 
 def connection(config):
-    print(config.get('private_key_file'))
     return SFTPConnection(config['host'],
                           config['username'],
                           password=config.get('password'),
