@@ -153,6 +153,7 @@ class SFTPConnection():
         return [f for f in files if matcher.search(f["filepath"])]
 
 def connection(config):
+    print(config.get('private_key_file'))
     return SFTPConnection(config['host'],
                           config['username'],
                           password=config.get('password'),
